@@ -1,0 +1,3 @@
+<launch>
+	<test pkg="test3" test-name="testtest" type="test.py" />
+</launch>
