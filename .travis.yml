@@ -4,6 +4,7 @@ env:
   - COMMAND='(catkin build; catkin test -p1)'
   - COMMAND='catkin_make test'
   - COMMAND='catkin_make_isolated --catkin-make-args test'
+  - COMMAND='(catkin build; for d in build/*; do echo $d; (cd $d; ./build_env.sh env | grep build) ;sed -i "s@# execute given args@export CATKIN_TEST_RESULTS_DIR=$(pwd)/$d/test_results; export ROS_TEST_RESULTS_DIR=$(pwd)/$d/test_results@" $d/build_env.sh; (cd $d; ./build_env.sh env | grep TEST; ./build_env.sh make test); done)'
 script:
   - ROS_DISTRO=hydro  ROSWS=wstool BUILDER=catkin    USE_DEB=true
   - export CI_SOURCE_PATH=$(pwd)
